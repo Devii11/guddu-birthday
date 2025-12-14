@@ -58,31 +58,51 @@
 
         <section class="things-we-love">
             <h2>All the things I love to do with you 💕</h2>
-            <div class="activities-grid">
-                <div class="activity-item">
-                    <div class="activity-icon">🍕</div>
-                    <div class="activity-text">Late night food adventures</div>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Placeholder slides - you'll replace these with your actual photos -->
+                        <div class="carousel-slide">
+                            <div class="photo-placeholder-carousel">
+                                <span>📷 Photo 1</span>
+                                <small>Add your first memory</small>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="photo-placeholder-carousel">
+                                <span>📷 Photo 2</span>
+                                <small>Add your second memory</small>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="photo-placeholder-carousel">
+                                <span>📷 Photo 3</span>
+                                <small>Add your third memory</small>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="photo-placeholder-carousel">
+                                <span>📷 Photo 4</span>
+                                <small>Add your fourth memory</small>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="photo-placeholder-carousel">
+                                <span>📷 Photo 5</span>
+                                <small>Add your fifth memory</small>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="photo-placeholder-carousel">
+                                <span>📷 Photo 6</span>
+                                <small>Add your sixth memory</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity-item">
-                    <div class="activity-icon">🎬</div>
-                    <div class="activity-text">Movie marathons together</div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon">🚗</div>
-                    <div class="activity-text">Random road trips</div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon">☕</div>
-                    <div class="activity-text">Morning coffee talks</div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon">🎵</div>
-                    <div class="activity-text">Dancing to our favorite songs</div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon">🌅</div>
-                    <div class="activity-text">Watching sunrises & sunsets</div>
-                </div>
+                <button class="carousel-btn carousel-btn-prev" onclick="moveCarousel(-1)">❮</button>
+                <button class="carousel-btn carousel-btn-next" onclick="moveCarousel(1)">❯</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
             </div>
         </section>
 
@@ -117,5 +137,53 @@
             <div class="heart">💞</div>
         </footer>
     </div>
+
+    <script>
+        let currentSlide = 0;
+        const track = document.getElementById('carousel-track');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        const dotsContainer = document.getElementById('carousel-dots');
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveCarousel(direction) {
+            currentSlide += direction;
+            
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            }
+            
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        // Auto-play carousel (optional)
+        setInterval(() => {
+            moveCarousel(1);
+        }, 5000); // Change slide every 5 seconds
+    </script>
 </body>
 </html>
