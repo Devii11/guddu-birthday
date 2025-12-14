@@ -282,6 +282,13 @@ body {
     width: 100%;
     height: 280px;
     object-fit: cover;
+    object-position: center;
+}
+
+/* Better handling for portrait photos */
+.gallery-item:nth-child(5) .gallery-thumb {
+    object-position: top;
+    height: 350px;
 }
 
 /* OPTION 2: Wide landscape photos */
