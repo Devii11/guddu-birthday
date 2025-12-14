@@ -58,66 +58,53 @@
 
         <section class="things-we-love">
             <h2>All the things I love to do with you 💕</h2>
-            <div class="carousel-container">
-                <div class="carousel-wrapper">
-                    <div class="carousel-track" id="carousel-track">
-                        <!-- Placeholder slides - you'll replace these with your actual photos -->
-                        <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <img src="carousel-photo1.jpg" alt="Memory 1" class="carousel-photo">
-                                <div class="carousel-caption">Obsessing over Naval</div>
-                            </div>
+            <div class="progressive-gallery" id="progressive-gallery">
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- First 6 photos visible initially -->
+                    <div class="gallery-item">
+                        <img src="carousel-photo1.jpg" alt="Memory 1" class="gallery-thumb">
+                        <div class="thumb-caption">Obsessing over Naval</div>
+                    </div>
+                    <div class="gallery-item hidden">
+                        <div class="photo-placeholder">
+                            <span>📷 Photo 2</span>
+                            <small>Add your second memory</small>
                         </div>
-                        <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="photo-placeholder-carousel">
-                                    <span>📷 Photo 2</span>
-                                    <small>Add your second memory</small>
-                                </div>
-                                <div class="carousel-caption">Your caption for photo 2 goes here</div>
-                            </div>
+                        <div class="thumb-caption">Your caption for photo 2</div>
+                    </div>
+                    <div class="gallery-item hidden">
+                        <div class="photo-placeholder">
+                            <span>📷 Photo 3</span>
+                            <small>Add your third memory</small>
                         </div>
-                        <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="photo-placeholder-carousel">
-                                    <span>📷 Photo 3</span>
-                                    <small>Add your third memory</small>
-                                </div>
-                                <div class="carousel-caption">Your caption for photo 3 goes here</div>
-                            </div>
+                        <div class="thumb-caption">Your caption for photo 3</div>
+                    </div>
+                    <div class="gallery-item hidden">
+                        <div class="photo-placeholder">
+                            <span>📷 Photo 4</span>
+                            <small>Add your fourth memory</small>
                         </div>
-                        <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="photo-placeholder-carousel">
-                                    <span>📷 Photo 4</span>
-                                    <small>Add your fourth memory</small>
-                                </div>
-                                <div class="carousel-caption">Your caption for photo 4 goes here</div>
-                            </div>
+                        <div class="thumb-caption">Your caption for photo 4</div>
+                    </div>
+                    <div class="gallery-item hidden">
+                        <div class="photo-placeholder">
+                            <span>📷 Photo 5</span>
+                            <small>Add your fifth memory</small>
                         </div>
-                        <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="photo-placeholder-carousel">
-                                    <span>📷 Photo 5</span>
-                                    <small>Add your fifth memory</small>
-                                </div>
-                                <div class="carousel-caption">Your caption for photo 5 goes here</div>
-                            </div>
+                        <div class="thumb-caption">Your caption for photo 5</div>
+                    </div>
+                    <div class="gallery-item hidden">
+                        <div class="photo-placeholder">
+                            <span>📷 Photo 6</span>
+                            <small>Add your sixth memory</small>
                         </div>
-                        <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="photo-placeholder-carousel">
-                                    <span>📷 Photo 6</span>
-                                    <small>Add your sixth memory</small>
-                                </div>
-                                <div class="carousel-caption">Your caption for photo 6 goes here</div>
-                            </div>
-                        </div>
+                        <div class="thumb-caption">Your caption for photo 6</div>
                     </div>
                 </div>
-                <button class="carousel-btn carousel-btn-prev" onclick="moveCarousel(-1)">❮</button>
-                <button class="carousel-btn carousel-btn-next" onclick="moveCarousel(1)">❯</button>
-                <div class="carousel-dots" id="carousel-dots"></div>
+                <button class="load-more-btn" id="load-more-btn" onclick="loadMorePhotos()">
+                    Load More Memories (+6)
+                </button>
+                <div class="photos-counter" id="photos-counter">Showing 1 of 42 photos</div>
             </div>
         </section>
 
@@ -195,10 +182,41 @@
             updateCarousel();
         }
 
-        // Auto-play carousel (optional)
-        setInterval(() => {
-            moveCarousel(1);
-        }, 5000); // Change slide every 5 seconds
+        // Progressive Loading functionality
+        let photosLoaded = 1;
+        const totalPhotos = 42;
+        const photosPerLoad = 6;
+
+        function updateCounter() {
+            document.getElementById('photos-counter').textContent = 
+                `Showing ${photosLoaded} of ${totalPhotos} photos`;
+            
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            if (photosLoaded >= totalPhotos) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                const remaining = Math.min(photosPerLoad, totalPhotos - photosLoaded);
+                loadMoreBtn.textContent = `Load More Memories (+${remaining})`;
+            }
+        }
+
+        function loadMorePhotos() {
+            const hiddenItems = document.querySelectorAll('.gallery-item.hidden');
+            const toReveal = Math.min(photosPerLoad, hiddenItems.length);
+            
+            for (let i = 0; i < toReveal; i++) {
+                if (hiddenItems[i]) {
+                    hiddenItems[i].classList.remove('hidden');
+                    hiddenItems[i].classList.add('visible');
+                    photosLoaded++;
+                }
+            }
+            
+            setTimeout(updateCounter, 100);
+        }
+
+        // Initialize counter
+        updateCounter();
     </script>
 </body>
 </html>
