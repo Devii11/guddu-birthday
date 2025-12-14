@@ -297,6 +297,12 @@ body {
     height: 320px;
 }
 
+/* Special handling for photo 25 (Twinning Winning) */
+.gallery-item:nth-child(25) .gallery-thumb {
+    object-position: top;
+    height: 340px;
+}
+
 /* OPTION 2: Wide landscape photos */
 /* Uncomment this section and comment the above to try */
 /*
