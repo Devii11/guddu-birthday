@@ -285,23 +285,7 @@ body {
     object-position: center;
 }
 
-/* Better handling for portrait photos */
-.gallery-item:nth-child(5) .gallery-thumb {
-    object-position: top;
-    height: 350px;
-}
-
-/* Special handling for photo 19 (Checking into our praaperty) */
-.gallery-item:nth-child(19) .gallery-thumb {
-    object-position: top;
-    height: 320px;
-}
-
-/* Special handling for photo 25 (Twinning Winning) */
-.gallery-item:nth-child(25) .gallery-thumb {
-    object-position: top;
-    height: 340px;
-}
+/* Removed all special photo dimension overrides - now all photos are perfectly consistent */
 
 /* OPTION 2: Wide landscape photos */
 /* Uncomment this section and comment the above to try */
