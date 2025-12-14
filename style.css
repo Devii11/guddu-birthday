@@ -109,7 +109,7 @@ body {
     color: #2c2c2c;
     font-weight: 300;
     letter-spacing: 2px;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .photo-grid, .video-grid {
@@ -173,7 +173,7 @@ body {
     margin-bottom: 30px;
     color: #2c2c2c;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .wishes p {
@@ -235,7 +235,7 @@ body {
     color: #2c2c2c;
     font-weight: 300;
     letter-spacing: 2px;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .progressive-gallery {
